@@ -17,7 +17,22 @@ depends_on = None
 
 
 def upgrade() -> None:
-    pass
+    op.create_table(
+        'games',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('title', sa.String(), nullable=False),
+        sa.Column('genre', sa.String(), nullable=False),
+        sa.Column('platform', sa.String(), nullable=False),
+        sa.Column('price', sa.Integer(), nullable=False),
+    )
+    
+    op.create_table(
+        'reviews',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('score', sa.Integer(), nullable=False),
+        sa.Column('comment', sa.String(), nullable=True),
+        sa.Column('game_id', sa.Integer(), sa.ForeignKey('games.id'), nullable=False),
+    )
 
 
 def downgrade() -> None:

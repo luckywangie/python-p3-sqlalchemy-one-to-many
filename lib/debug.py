@@ -11,3 +11,10 @@ if __name__ == '__main__':
     session = Session()
 
     import ipdb; ipdb.set_trace()
+
+    # Query a game and its associated reviews
+    game = session.query(Game).first()
+    print(f'Game: {game}')
+    print('Reviews:')
+    for review in game.reviews:
+        print(f'- {review}')
